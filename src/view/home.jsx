@@ -8,6 +8,7 @@ import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { useQuery } from "@apollo/client";
 import DateFnsUtils from "@date-io/date-fns";
 import {
     Autocomplete,
@@ -21,6 +22,7 @@ import { conexionApiCovid, conexionApiCountries } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { listCountries } from "../graphql/queries";
 
 function Copyright() {
     return (
@@ -55,6 +57,7 @@ export default function Home() {
         defaultValues,
     });
     const [openError, setOpenError] = useState(false);
+    const [countriesState, setCountriesState] = useState([]);
 
     const handleClose = (event, reason) => {
         if (reason === "clickaway") {
@@ -74,17 +77,22 @@ export default function Home() {
         url: "",
     });
 
-    const urlCountries = Services.getCountries();
+    const { loading: loadingListCountryGraph, data: dataListCountryGraph } = useQuery(
+        listCountries,
+        {
+            errorPolicy: "all",
+            fetchPolicy: "network-only",
+        },
+    );
 
-    const {
-        response: responseCountries,
-        error: errorCountries,
-        isLoading: isLoadingCountries,
-    } = useFetch({
-        api: conexionApiCountries,
-        method: "get",
-        url: urlCountries,
-    });
+    useEffect(() => {
+        if (dataListCountryGraph && dataListCountryGraph.listCountries) {
+            console.log("ajdda: ", dataListCountryGraph.listCountries);
+            setCountriesState(dataListCountryGraph.listCountries);
+        }
+    }, [dataListCountryGraph]);
+
+    console.log("data: ", countriesState);
 
     const onSubmit = ({ country }) => {
         const currentDate = new Date();
@@ -115,10 +123,10 @@ export default function Home() {
     };
 
     useEffect(() => {
-        if (errorCovid || errorCountries) {
+        if (errorCovid) {
             setOpenError(true);
         }
-    }, [errorCovid, errorCountries]);
+    }, [errorCovid]);
 
     return (
         <Container component="main" className="container">
@@ -136,14 +144,14 @@ export default function Home() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-item">
-                        {isLoadingCountries === false ? (
+                        {loadingListCountryGraph === false ? (
                             <Autocomplete
-                                countries={responseCountries}
+                                countries={countriesState}
                                 control={control}
                                 errors={errors.country}
                             />
                         ) : (
-                            isLoadingCountries && <CircularProgressComponent />
+                            loadingListCountryGraph && <CircularProgressComponent />
                         )}
                     </div>
                     <div className="form-item">

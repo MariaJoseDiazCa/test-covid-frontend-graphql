@@ -41,7 +41,7 @@ export default function ComboBox(props) {
                     getOptionLabel={(option) => option.name}
                     renderOption={(option) => (
                         <span>
-                            {countryToFlag(option.alpha2Code)} {option.name}
+                            {countryToFlag(option.code)} {option.name}
                         </span>
                     )}
                     renderInput={(params) => (
@@ -71,9 +71,3 @@ function countryToFlag(isoCode) {
               .replace(/./g, (char) => String.fromCodePoint(char.charCodeAt(0) + 127397))
         : isoCode;
 }
-
-// const countries = [
-//     { code: "AD", label: "Andorra", phone: "376" },
-//     { code: "AE", label: "United Arab Emirates", phone: "971" },
-//     { code: "AF", label: "Afghanistan", phone: "93" },
-// ];
