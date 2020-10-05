@@ -5,7 +5,7 @@ export const listCountries = gql`
         listCountries {
             id
             name
-            code
+            flag
         }
     }
 `;

@@ -17,8 +17,8 @@ import {
     CircularProgressComponent,
 } from "../components";
 import Services from "../services";
-import { useLazyFetch, useFetch } from "../hooks";
-import { conexionApiCovid, conexionApiCountries } from "../config/api";
+import { useLazyFetch } from "../hooks";
+import { conexionApiCovid } from "../config/api";
 import { dateFormatIso8601 } from "../helpers";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -87,12 +87,9 @@ export default function Home() {
 
     useEffect(() => {
         if (dataListCountryGraph && dataListCountryGraph.listCountries) {
-            console.log("ajdda: ", dataListCountryGraph.listCountries);
             setCountriesState(dataListCountryGraph.listCountries);
         }
     }, [dataListCountryGraph]);
-
-    console.log("data: ", countriesState);
 
     const onSubmit = ({ country }) => {
         const currentDate = new Date();

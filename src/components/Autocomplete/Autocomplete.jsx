@@ -41,7 +41,7 @@ export default function ComboBox(props) {
                     getOptionLabel={(option) => option.name}
                     renderOption={(option) => (
                         <span>
-                            {countryToFlag(option.code)} {option.name}
+                            {countryToFlag(option.flag)} {option.name}
                         </span>
                     )}
                     renderInput={(params) => (
