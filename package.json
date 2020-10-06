@@ -17,6 +17,7 @@
         "bootstrap": "^4.5.0",
         "clsx": "^1.1.1",
         "date-fns": "^2.14.0",
+        "env-cmd": "^10.1.0",
         "graphql": "^15.3.0",
         "highcharts": "^8.1.2",
         "highcharts-react-official": "^3.0.0",
@@ -31,7 +32,9 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
         "start": "react-scripts start",
+        "start:prod": "env-cmd -f .env.production react-scripts start",
         "build": "react-scripts build",
+        "build:prod": "env-cmd -f .env.production react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
