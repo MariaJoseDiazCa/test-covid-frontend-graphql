@@ -6,10 +6,3 @@ export const conexionApiCovid = axios.create({
         "Content-type": "application/json",
     },
 });
-
-export const conexionApiCountries = axios.create({
-    baseURL: process.env.REACT_APP_URL_COUNTRIES,
-    headers: {
-        "Content-type": "application/json",
-    },
-});
