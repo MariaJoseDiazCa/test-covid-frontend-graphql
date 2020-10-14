@@ -6,7 +6,7 @@ The project complete was created with functional components with React Hooks.
 The main functionalities developed were:
 
 -   connection with api covid-19 with the axios library [www.covid19api.com](https://covid19api.com/ "www.covid19api.com")
--   connection with api countries with the axios library [www.restcountries.eu](https://restcountries.eu/ "www.restcountries.eu")
+-   connection with api graphql countries with the apollo client library
 
 ### Tech
 
@@ -18,23 +18,23 @@ This test project uses a number of open source library to work properly:
 -   [Sass](https://sass-lang.com/) - A CSS preprocessor
 -   [Material-Ui](https://material-ui.com/) - React UI component
 -   [HighChart](https://highcharts.com/) - HighChart
+-   [Apollo Client](https://www.apollographql.com/) - Apollo Client
 
-This React Test are available in a [public repository](https://rodrigogomezcerda.github.io/test-covid-frontend-api/)
-on GitHub.
+This React Test are available in a [public repository](https://wemrchile.com/).
 
 ### Installation
 
--   create .env file and add environment variables:
+-   create .env and .env.production.local file and add environment variables:
 
 ```sh
+REACT_APP_API_URL=https://localhost:4000
 REACT_APP_URL_COVID19=https://api.covid19api.com/country
-REACT_APP_URL_COUNTRIES=https://restcountries.eu/rest/v2
 ```
 
 -   install dependencias `npm install`
 
 ```sh
-$ cd test-covid-frontend
+$ cd test-covid-frontend-graphql
 $ npm install
 $ npm start
 ```
